@@ -32,7 +32,6 @@ public class DriverController {
 
 
 
-
         var driverDetailsDto = driverServices.save(driver, company);
         String location = "/companies/" + company + "/drivers/" + driverDetailsDto.id();
         return ResponseEntity.created(URI.create(location)).body(driverDetailsDto);
@@ -47,7 +46,8 @@ public class DriverController {
     @Transactional
     public ResponseEntity<DriverDetailsDto> getDetailsDriver(@PathVariable UUID company, @PathVariable int id) {
         var driver = driverServices.findByIdandCompany(company, id).orElseThrow(() -> new IllegalArgumentException("Driver not found"));
-        return ResponseEntity.ok(driver);
+        var driverDetailsDto = new DriverDetailsDto(driver);
+        return ResponseEntity.ok(driverDetailsDto);
     }
     @PutMapping("/{id}")
     @Transactional

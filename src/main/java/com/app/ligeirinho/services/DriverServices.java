@@ -40,8 +40,8 @@ public class DriverServices implements IDriverServices {
     }
 
     @Override
-    public Optional<DriverDetailsDto> findByIdandCompany(UUID company, int id) {
-        return repository.findByIdAndCompanyId(id, company).map(DriverDetailsDto::new);
+    public Optional<Driver> findByIdandCompany(UUID company, int id) {
+        return repository.findByIdAndCompanyId(id, company);
     }
 
     @Override
